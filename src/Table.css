@@ -1,0 +1,18 @@
+table {
+    border: 2px solid green;
+    text-align: center;
+    margin-top : 34px;
+    background-color: green;
+    margin-left: 400px;
+    /*margin-right: 60px;*/
+}
+
+thead tr > th {
+    border-right: 2px solid black;
+    padding-right: 5px;
+    height: 50px;
+}
+
+tbody {
+    background-color: white;
+}
