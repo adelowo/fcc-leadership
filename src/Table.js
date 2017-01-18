@@ -14,8 +14,8 @@ const Table = React.createClass({
                 <tr>
                     <th>S/N</th>
                     <th>Username</th>
-                    <th>Recent points (Click to toggle)</th>
-                    <th>Alltime Points (Click to toggle)</th>
+                    <th onClick={() => this.reBuildBoard('recent')}>Recent points (Click to toggle)</th>
+                    <th onClick={() => this.reBuildBoard('alltime')}>Alltime Points (Click to toggle)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,12 +29,8 @@ const Table = React.createClass({
         );
     },
 
-    reBuildBoard(relativeUrl = 'alltime') {
-        if ("function" === typeof this.props.callback) {
-            return this.props.callback(relativeUrl);
-        }
-
-        alert("OOPS");
+    reBuildBoard(relativeUrl) {
+        this.props.callback(relativeUrl);
     }
 });
 

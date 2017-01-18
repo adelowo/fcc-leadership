@@ -1,27 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './LeadershipBoard.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./LeadershipBoard.css";
 import Table from "./Table";
 import axios from "axios";
 
 const LeadershipBoard = React.createClass({
 
-	getInitialState() {
-		return {
-			leaders : []
-		}
-	},
+    getInitialState() {
+        return {
+            leaders: []
+        }
+    },
 
-	componentDidMount() {
-        this.getLeaders();
-	},
+    componentDidMount() {
+        this.getLeaders('recent');
+    },
 
-    render() {    	
+    render() {
 
         let table;
 
         if (this.state.leaders.length > 0) {
-            table = <Table leaders={this.state.leaders} />
+            table = <Table leaders={this.state.leaders} callback={this.getLeaders}/>
         } else {
             table = "Wait a second while i fetch this";
         }
@@ -40,13 +40,14 @@ const LeadershipBoard = React.createClass({
         );
     },
 
-    getLeaders(relative = 'recent'){
-        return axios.get("https://fcctop100.herokuapp.com/api/fccusers/top/" + relative).then((response) => {
-            this.setState({leaders : response.data});
-        }).catch((error) => {
-            alert("Something went wrong, check the console");
-        	console.log(error);
-        })
+    getLeaders(relative){
+        return axios.get("https://fcctop100.herokuapp.com/api/fccusers/top/" + relative)
+            .then((response) => {
+                this.setState({leaders: response.data});
+            }).catch((error) => {
+                console.log(error);
+                alert("Something went wrong, check the console");
+            });
     }
 });
 
